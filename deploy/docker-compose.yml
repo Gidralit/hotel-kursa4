@@ -1,0 +1,96 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "80:80"
+    networks:
+      - hotel
+    volumes:
+      - ../project/server/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ../backend/storage/app/public:/var/www/storage/app/public
+    depends_on:
+      - frontend
+      - backend
+      - db
+      - pgadmin
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    volumes:
+      - ../project/frontend:/app
+    ports:
+      - "5173:5173"
+    networks:
+      - hotel
+    depends_on:
+      - backend
+    command: >
+      sh -c "npm install && npm run dev";
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    networks:
+      - hotel
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../project/backend:/var/www
+    environment:
+      APP_DEBUG: "true"
+      DB_CONNECTION: "pgsql"
+      DB_HOST: "db"
+      DB_PORT: "5432"
+      DB_DATABASE: "database"
+      DB_USERNAME: "admin"
+      DB_PASSWORD: "admin"
+    depends_on:
+      - db
+    command: >
+      sh -c "echo 'Установка зависимостей';
+      composer install --no-progress --no-suggest --optimize-autoloader;
+      echo 'Запуск миграций';
+      php artisan migrate:fresh --force;
+      echo 'Запуск сервера';
+      php artisan serve --host=0.0.0.0 --port=8000";
+
+  db:
+    image: postgres:latest
+    container_name: db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: database
+    networks:
+      - hotel
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+
+  pgadmin:
+    image: dpage/pgadmin
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    networks:
+      - hotel
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
+networks:
+  hotel:
+    driver: bridge
+
+volumes:
+  db_data:
