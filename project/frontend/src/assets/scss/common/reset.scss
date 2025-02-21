@@ -1,0 +1,9 @@
+*{padding: 0;margin: 0;border: 0;}
+*{box-sizing: border-box;}
+:focus,:active{outline: none;}
+header{display: block;}
+html,body{
+  height:100%;width:100%;
+  font-size:100%;line-height:1;}
+button{cursor: pointer;}
+a,a:visited{text-decoration: none;color:inherit;}
