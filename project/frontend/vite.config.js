@@ -17,6 +17,14 @@ export default defineConfig({
       '~fonts': fileURLToPath(new URL('./fonts', import.meta.url))
     },
   },
+  server: {
+    host: '0.0.0.0',
+    port: 5173,
+    strictPort: true,
+    watch: {
+      usePolling: true,
+    },
+  },
   css:{
     preprocessorOptions: {
       scss: {
