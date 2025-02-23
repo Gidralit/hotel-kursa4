@@ -1,13 +1,3 @@
-<script setup>
-import ReservedButton from "@/components/button/ReservedButton.vue";
-defineProps({
-  room:{
-    type: Object,
-    required: true
-  }
-})
-</script>
-
 <template>
   <div class="room">
     <div>
@@ -40,6 +30,16 @@ defineProps({
     </div>
   </div>
 </template>
+
+<script setup>
+import { ReservedButton } from "@/components";
+defineProps({
+  room:{
+    type: Object,
+    required: true
+  }
+})
+</script>
 
 <style scoped lang="scss">
 .room {

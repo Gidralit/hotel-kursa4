@@ -1,5 +1,20 @@
+<template>
+  <div class="filter__group">
+    <h3 class="filter__subtitle">Площадь</h3>
+    <div class="filter__checkbox-group">
+      <filter-area
+        v-for="area in areas"
+        :key="area"
+        :area="area"
+        :selected="selectedAreas.includes(area)"
+        @change="toggleArea(area)"
+      />
+    </div>
+  </div>
+</template>
+
 <script setup>
-import FilterArea from "@/components/catalog/filters/FilterArea.vue";
+import { FilterArea } from "@/components";
 import { ref, watch } from 'vue';
 
 const props = defineProps({
@@ -31,21 +46,6 @@ watch(() => props.selected, (newVal) => {
   selectedAreas.value = [...newVal];
 });
 </script>
-
-<template>
-  <div class="filter__group">
-    <h3 class="filter__subtitle">Площадь</h3>
-    <div class="filter__checkbox-group">
-      <filter-area
-        v-for="area in areas"
-        :key="area"
-        :area="area"
-        :selected="selectedAreas.includes(area)"
-        @change="toggleArea(area)"
-      />
-    </div>
-  </div>
-</template>
 
 
 

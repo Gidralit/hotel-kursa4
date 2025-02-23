@@ -1,7 +1,3 @@
-<script setup>
-import ReservedButton from "@/components/button/ReservedButton.vue";
-</script>
-
 <template>
   <section class="greeting">
     <div class="greeting__info">
@@ -11,6 +7,10 @@ import ReservedButton from "@/components/button/ReservedButton.vue";
     </div>
   </section>
 </template>
+
+<script setup>
+import { ReservedButton } from "@/components";
+</script>
 
 <style scoped lang="scss">
 .greeting{

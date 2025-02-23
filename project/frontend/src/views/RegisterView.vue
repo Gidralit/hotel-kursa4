@@ -1,8 +1,3 @@
-<script setup>
-import RegisterForm from "@/components/forms/RegisterForm.vue";
-import LoginForm from "@/components/forms/LoginForm.vue";
-</script>
-
 <template>
   <div
     class="m-0 my-12 p-0 justify-center items-center flex"
@@ -21,6 +16,10 @@ import LoginForm from "@/components/forms/LoginForm.vue";
     </div>
   </div>
 </template>
+
+<script setup>
+import { RegisterForm,LoginForm } from "@/components";
+</script>
 
 <style scoped lang="scss">
 .main {

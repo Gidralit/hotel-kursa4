@@ -15,7 +15,6 @@
     </div>
   </div>
 </template>
-
 <style scoped lang="scss">
 .profile {
   @apply my-12 mx-auto justify-between p-8 flex bg-white rounded-lg shadow-lg;
@@ -67,5 +66,3 @@
   }
 }
 </style>
-<script setup lang="ts">
-</script>

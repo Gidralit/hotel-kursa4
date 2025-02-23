@@ -1,17 +1,3 @@
-<script setup>
-import {useMainStore} from "@/stores/MainStore.js";
-import {storeToRefs} from "pinia";
-import {onMounted} from "vue";
-import HomeAboutSkeleton from "@/components/home-page/about/HomeAboutSkeleton.vue";
-
-const { getMainInfo } = useMainStore();
-const { data } = storeToRefs(useMainStore())
-
-onMounted(async () => {
-  await getMainInfo();
-})
-</script>
-
 <template>
   <div>
     <div v-if="data">
@@ -67,6 +53,20 @@ onMounted(async () => {
     <home-about-skeleton v-else/>
   </div>
 </template>
+
+<script setup>
+import {useMainStore} from "@/stores/MainStore.js";
+import {storeToRefs} from "pinia";
+import {onMounted} from "vue";
+import HomeAboutSkeleton from "@/components/home-page/about/HomeAboutSkeleton.vue";
+
+const { getMainInfo } = useMainStore();
+const { data } = storeToRefs(useMainStore())
+
+onMounted(async () => {
+  await getMainInfo();
+})
+</script>
 <style scoped lang="scss">
 .about{
   &__info-block{

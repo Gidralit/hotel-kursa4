@@ -1,23 +1,3 @@
-<script setup>
-import { useCatalogStore } from '@/stores/CatalogStore.js';
-import { useRoomsStore } from '@/stores/RoomsStore.js';
-import { storeToRefs } from 'pinia';
-import { onMounted } from 'vue';
-
-const catalogStore = useCatalogStore();
-const roomsStore = useRoomsStore();
-const { params } = storeToRefs(catalogStore);
-const { isLoading } = storeToRefs(roomsStore);
-
-const emitSort = async () => {
-  await catalogStore.updateSortOrder(params.value.sort_order);
-};
-
-onMounted(async () => {
-  await roomsStore.getRooms();
-});
-</script>
-
 <template>
   <div class="sort">
     <div class="flex flex-col">
@@ -47,6 +27,26 @@ onMounted(async () => {
     </div>
   </div>
 </template>
+
+<script setup>
+import { useCatalogStore } from '@/stores/CatalogStore.js';
+import { useRoomsStore } from '@/stores/RoomsStore.js';
+import { storeToRefs } from 'pinia';
+import { onMounted } from 'vue';
+
+const catalogStore = useCatalogStore();
+const roomsStore = useRoomsStore();
+const { params } = storeToRefs(catalogStore);
+const { isLoading } = storeToRefs(roomsStore);
+
+const emitSort = async () => {
+  await catalogStore.updateSortOrder(params.value.sort_order);
+};
+
+onMounted(async () => {
+  await roomsStore.getRooms();
+});
+</script>
 
 <style lang="scss">
 .sort {

@@ -1,19 +1,3 @@
-<script setup>
-import RoomHomeCard from "@/components/room/RoomHomeCard.vue";
-import RoomHomeSkeleton from "@/components/room/RoomHomeSkeleton.vue";
-
-import {storeToRefs} from "pinia";
-import {useRoomsStore} from "@/stores/RoomsStore.js";
-import {onMounted} from "vue";
-const { mainRooms } = storeToRefs(useRoomsStore())
-const { getMainRooms } = useRoomsStore()
-
-onMounted(async ()=>{
-  mainRooms.value = null
-  await getMainRooms()
-})
-</script>
-
 <template>
   <section
     id="rooms"
@@ -41,6 +25,21 @@ onMounted(async ()=>{
     </div>
   </section>
 </template>
+
+<script setup>
+import { RoomHomeCard, RoomHomeSkeleton } from "@/components";
+
+import {storeToRefs} from "pinia";
+import {useRoomsStore} from "@/stores/RoomsStore.js";
+import {onMounted} from "vue";
+const { mainRooms } = storeToRefs(useRoomsStore())
+const { getMainRooms } = useRoomsStore()
+
+onMounted(async ()=>{
+  mainRooms.value = null
+  await getMainRooms()
+})
+</script>
 
 <style scoped lang="scss">
 .rooms {

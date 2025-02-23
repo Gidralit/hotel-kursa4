@@ -1,3 +1,22 @@
+<template>
+  <label
+    class="filter__label"
+    for="price"
+  >
+    <slot/>
+  </label>
+  <input
+    id="price"
+    v-model="userInput"
+    type="number"
+    class="filter__input"
+    :placeholder="`от ${min} до ${max}`"
+    :min="min"
+    :max="max"
+    @change="handleInputChange"
+  />
+</template>
+
 <script setup>
 import { ref, watch } from 'vue';
 
@@ -33,25 +52,6 @@ const handleInputChange = () => {
   emit('update:modelValue', userInput.value);
 };
 </script>
-
-<template>
-  <label
-    class="filter__label"
-    for="price"
-  >
-    <slot/>
-  </label>
-  <input
-    id="price"
-    v-model="userInput"
-    type="number"
-    class="filter__input"
-    :placeholder="`от ${min} до ${max}`"
-    :min="min"
-    :max="max"
-    @change="handleInputChange"
-  />
-</template>
 
 <style scoped lang="scss">
 .filter__label {

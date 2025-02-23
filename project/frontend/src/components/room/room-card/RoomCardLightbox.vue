@@ -1,3 +1,33 @@
+<template>
+  <div class="room__lightbox">
+    <button
+      class="room__lightbox-close"
+      @click="emit('close')"
+    >
+      &times;
+    </button>
+    <button
+      class="room__lightbox-nav room__lightbox-nav--prev"
+      :disabled="currentImageIndex === 0"
+      @click="emit('prev')"
+    >
+      &#10094;
+    </button>
+    <img
+      :src="room.photos[currentImageIndex].photo"
+      class="room__lightbox-image"
+      alt="room-image"
+    />
+    <button
+      class="room__lightbox-nav room__lightbox-nav--next"
+      :disabled="currentImageIndex === room.photos.length - 1"
+      @click="emit('next')"
+    >
+      &#10095;
+    </button>
+  </div>
+</template>
+
 <script setup>
 import { onMounted, onUnmounted } from "vue";
 
@@ -32,36 +62,6 @@ onUnmounted(() => {
   window.removeEventListener('keydown', handleKeydown);
 });
 </script>
-
-<template>
-  <div class="room__lightbox">
-    <button
-      class="room__lightbox-close"
-      @click="emit('close')"
-    >
-      &times;
-    </button>
-    <button
-      class="room__lightbox-nav room__lightbox-nav--prev"
-      :disabled="currentImageIndex === 0"
-      @click="emit('prev')"
-    >
-      &#10094;
-    </button>
-    <img
-      :src="room.photos[currentImageIndex].photo"
-      class="room__lightbox-image"
-      alt="room-image"
-    />
-    <button
-      class="room__lightbox-nav room__lightbox-nav--next"
-      :disabled="currentImageIndex === room.photos.length - 1"
-      @click="emit('next')"
-    >
-      &#10095;
-    </button>
-  </div>
-</template>
 
 <style scoped lang="scss">
 .room__lightbox {

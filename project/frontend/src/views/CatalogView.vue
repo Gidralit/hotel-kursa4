@@ -1,37 +1,3 @@
-<script setup>
-import { CatalogFilters, CatalogSorting } from '@/components/catalog/index.js'
-
-import RoomCatalogCard from "@/components/room/RoomCatalogCard.vue";
-import RoomCatalogSkeleton from "@/components/room/RoomCatalogSkeleton.vue";
-import { onMounted, ref } from "vue";
-import BookingModal from "@/components/BookingModal.vue";
-import {useRoomsStore} from "@/stores/RoomsStore.js";
-import {storeToRefs} from "pinia";
-import {useAuthStore} from "@/stores/AuthStore.js";
-
-const roomsStore = useRoomsStore();
-const { getRooms } = roomsStore;
-
-const { user } = storeToRefs(useAuthStore())
-
-const book = ref(false);
-const selectedRoomId = ref(null);
-
-const startBook = (roomId) => {
-  selectedRoomId.value = roomId;
-  book.value = true;
-};
-
-const cancelBook = () => {
-  book.value = false;
-  selectedRoomId.value = null;
-};
-
-onMounted(async () => {
-  await getRooms();
-});
-</script>
-
 <template>
   <div class="flex justify-between position-relative">
     <div class="flex flex-col">
@@ -69,6 +35,37 @@ onMounted(async () => {
     />
   </div>
 </template>
+
+<script setup>
+import { CatalogFilters, CatalogSorting,RoomCatalogCard,RoomCatalogSkeleton,BookingModal } from '@/components'
+
+import { onMounted, ref } from "vue";
+import {useRoomsStore} from "@/stores/RoomsStore.js";
+import {storeToRefs} from "pinia";
+import {useAuthStore} from "@/stores/AuthStore.js";
+
+const roomsStore = useRoomsStore();
+const { getRooms } = roomsStore;
+
+const { user } = storeToRefs(useAuthStore())
+
+const book = ref(false);
+const selectedRoomId = ref(null);
+
+const startBook = (roomId) => {
+  selectedRoomId.value = roomId;
+  book.value = true;
+};
+
+const cancelBook = () => {
+  book.value = false;
+  selectedRoomId.value = null;
+};
+
+onMounted(async () => {
+  await getRooms();
+});
+</script>
 
 <style scoped lang="scss">
 .rooms {

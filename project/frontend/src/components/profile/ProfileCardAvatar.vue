@@ -1,18 +1,3 @@
-<script setup>
-defineProps({
-  photo:{
-    type:[String,null],
-    required: true
-  },
-  isAdmin:{
-    type:Boolean,
-    required:true
-  }
-})
-
-
-</script>
-
 <template>
   <div class="profile__avatar">
     <img
@@ -35,6 +20,19 @@ defineProps({
     />
   </div>
 </template>
+
+<script setup>
+defineProps({
+  photo:{
+    type:[String,null],
+    required: true
+  },
+  isAdmin:{
+    type:Boolean,
+    required:true
+  }
+})
+</script>
 
 <style scoped lang="scss">
 .profile {

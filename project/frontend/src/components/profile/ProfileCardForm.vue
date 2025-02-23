@@ -1,39 +1,3 @@
-<script setup>
-import { ref } from 'vue'
-import { useAuthStore } from '@/stores/AuthStore';
-
-const props = defineProps({
-  errors: {
-    type: Object,
-    required: true,
-  },
-  formData: {
-    type: Object,
-    required: true,
-  },
-});
-
-const formDataRef = ref(props.formData)
-const emit = defineEmits(['save', 'cancel']);
-
-
-const authStore = useAuthStore();
-const selectedFile = ref(null);
-
-const handleFileUpload = (event) => {
-  selectedFile.value = event.target.files[0];
-};
-
-const uploadPhoto = async () => {
-  if (selectedFile.value) {
-    await authStore.updatePhoto(selectedFile.value);
-  } else {
-    console.log('Файл не выбран');
-  }
-};
-
-</script>
-
 <template>
   <form
     class="profile__form"
@@ -162,6 +126,42 @@ const uploadPhoto = async () => {
     </div>
   </form>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+import { useAuthStore } from '@/stores/AuthStore';
+
+const props = defineProps({
+  errors: {
+    type: Object,
+    required: true,
+  },
+  formData: {
+    type: Object,
+    required: true,
+  },
+});
+
+const formDataRef = ref(props.formData)
+const emit = defineEmits(['save', 'cancel']);
+
+
+const authStore = useAuthStore();
+const selectedFile = ref(null);
+
+const handleFileUpload = (event) => {
+  selectedFile.value = event.target.files[0];
+};
+
+const uploadPhoto = async () => {
+  if (selectedFile.value) {
+    await authStore.updatePhoto(selectedFile.value);
+  } else {
+    console.log('Файл не выбран');
+  }
+};
+
+</script>
 
 
 <style scoped lang="scss">

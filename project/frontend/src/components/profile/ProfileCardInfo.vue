@@ -1,26 +1,3 @@
-<script setup>
-defineProps({
-  user:{
-    type:Object,
-    required:true
-  }
-})
-
-const emit = defineEmits(['start']);
-
-const formattedDate = (date) => {
-  if (!date) return 'Дата неизвестна';
-  const parsedDate = new Date(date);
-  return parsedDate.toLocaleDateString('ru-RU', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  });
-};
-</script>
-
 <template>
   <div
     class="profile__info"
@@ -50,6 +27,29 @@ const formattedDate = (date) => {
     </button>
   </div>
 </template>
+
+<script setup>
+defineProps({
+  user:{
+    type:Object,
+    required:true
+  }
+})
+
+const emit = defineEmits(['start']);
+
+const formattedDate = (date) => {
+  if (!date) return 'Дата неизвестна';
+  const parsedDate = new Date(date);
+  return parsedDate.toLocaleDateString('ru-RU', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+};
+</script>
 
 <style scoped lang="scss">
 .profile {

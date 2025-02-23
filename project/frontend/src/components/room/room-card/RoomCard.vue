@@ -1,6 +1,42 @@
+<template>
+  <div>
+    <div class="room__container">
+      <room-card-gallery
+        :room="props.room"
+        @open="openLightbox"
+      />
+
+      <room-card-info
+        :room="room"
+        @start="emit('start-book', room.id)"
+      />
+
+      <room-card-lightbox
+        v-if="showLightbox"
+        :room="room"
+        :current-image-index="currentImageIndex"
+        @click.self="closeLightbox"
+        @close="closeLightbox"
+        @next="nextImage"
+        @prev="prevImage"
+      />
+    </div>
+
+    <div
+      v-if="randomRooms"
+      class="flex justify-between my-10"
+    >
+      <random-room
+        v-for="randomRoom in randomRooms"
+        :key="randomRoom.id"
+        :random-room="randomRoom"
+      />
+    </div>
+  </div>
+</template>
+
 <script setup>
-import RandomRoom from "@/components/room/RandomRoom.vue";
-import { RoomCardInfo, RoomCardGallery, RoomCardLightbox } from '@/components/room/room-card/index.js'
+import { RoomCardInfo, RoomCardGallery, RoomCardLightbox, RandomRoom } from '@/components'
 import { ref } from "vue";
 
 const props = defineProps({
@@ -41,43 +77,6 @@ const nextImage = () => {
 };
 
 </script>
-
-<template>
-  <div>
-    <div class="room__container">
-      <room-card-gallery
-        :room="props.room"
-        @open="openLightbox"
-      />
-
-      <room-card-info
-        :room="room"
-        @start="emit('start-book', room.id)"
-      />
-
-      <room-card-lightbox
-        v-if="showLightbox"
-        :room="room"
-        :current-image-index="currentImageIndex"
-        @click.self="closeLightbox"
-        @close="closeLightbox"
-        @next="nextImage"
-        @prev="prevImage"
-      />
-    </div>
-
-    <div
-      v-if="randomRooms"
-      class="flex justify-between my-10"
-    >
-      <random-room
-        v-for="randomRoom in randomRooms"
-        :key="randomRoom.id"
-        :random-room="randomRoom"
-      />
-    </div>
-  </div>
-</template>
 
 <style scoped lang="scss">
 .room__container {

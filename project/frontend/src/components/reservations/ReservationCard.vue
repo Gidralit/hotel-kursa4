@@ -1,29 +1,3 @@
-<script setup>
-import {useRoomsStore} from "@/stores/RoomsStore.js";
-
-const props = defineProps({
-  reservation: {
-    type: Object,
-    required: true,
-  },
-});
-
-const { deleteBookingRoom } = useRoomsStore()
-const { getReservations } = useRoomsStore();
-
-const calculateTotalPrice = () => {
-  const startDate = new Date(props.reservation.start_date);
-  const endDate = new Date(props.reservation.end_date);
-  const days = (endDate - startDate) / (1000 * 60 * 60 * 24);
-  return days * parseFloat(props.reservation.room.price);
-};
-const deleteBooking = async (id) =>{
-  await deleteBookingRoom(id);
-  await getReservations();
-}
-</script>
-
-
 <template>
   <div
     v-if="reservation"
@@ -83,6 +57,32 @@ const deleteBooking = async (id) =>{
     </div>
   </div>
 </template>
+
+
+<script setup>
+import {useRoomsStore} from "@/stores/RoomsStore.js";
+
+const props = defineProps({
+  reservation: {
+    type: Object,
+    required: true,
+  },
+});
+
+const { deleteBookingRoom } = useRoomsStore()
+const { getReservations } = useRoomsStore();
+
+const calculateTotalPrice = () => {
+  const startDate = new Date(props.reservation.start_date);
+  const endDate = new Date(props.reservation.end_date);
+  const days = (endDate - startDate) / (1000 * 60 * 60 * 24);
+  return days * parseFloat(props.reservation.room.price);
+};
+const deleteBooking = async (id) =>{
+  await deleteBookingRoom(id);
+  await getReservations();
+}
+</script>
 
 
 

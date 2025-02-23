@@ -1,20 +1,3 @@
-<script setup>
-import ReservedButton from "@/components/button/ReservedButton.vue";
-
-const props = defineProps({
-  room: {
-    type: Object,
-    required: true,
-  },
-  book: {
-    type: Boolean,
-    required: true,
-  },
-});
-
-const emit = defineEmits(["start"]);
-</script>
-
 <template>
   <div>
     <article
@@ -65,6 +48,23 @@ const emit = defineEmits(["start"]);
     </article>
   </div>
 </template>
+
+<script setup>
+import { ReservedButton } from "@/components";
+
+defineProps({
+  room: {
+    type: Object,
+    required: true,
+  },
+  book: {
+    type: Boolean,
+    required: true,
+  },
+});
+
+const emit = defineEmits(["start"]);
+</script>
 <style scoped lang="scss">
 .room{
   letter-spacing: 0.05em;
