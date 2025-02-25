@@ -40,14 +40,10 @@
 import { CatalogFilters, CatalogSorting,RoomCatalogCard,RoomCatalogSkeleton,BookingModal } from '@/components'
 
 import { onMounted, ref } from "vue";
-import {useRoomsStore} from "@/stores/RoomsStore.js";
-import {storeToRefs} from "pinia";
-import {useAuthStore} from "@/stores/AuthStore.js";
+import {useRoomsStore} from "@/stores";
 
 const roomsStore = useRoomsStore();
 const { getRooms } = roomsStore;
-
-const { user } = storeToRefs(useAuthStore())
 
 const book = ref(false);
 const selectedRoomId = ref(null);

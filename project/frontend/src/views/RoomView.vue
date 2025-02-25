@@ -23,7 +23,7 @@ import {ref, onMounted, watch} from 'vue';
 import { useRoute } from 'vue-router';
 import { RoomCard, RoomCardSkeleton, BookingModal } from '@/components'
 
-import {useRoomsStore} from "@/stores/RoomsStore.js";
+import {useRoomsStore} from "@/stores";
 import {storeToRefs} from "pinia";
 
 const { getRooms, getRandomRooms } = useRoomsStore();

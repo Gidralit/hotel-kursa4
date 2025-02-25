@@ -29,8 +29,7 @@
 </template>
 
 <script setup>
-import { useCatalogStore } from '@/stores/CatalogStore.js';
-import { useRoomsStore } from '@/stores/RoomsStore.js';
+import { useCatalogStore, useRoomsStore } from '@/stores';
 import { storeToRefs } from 'pinia';
 import { onMounted } from 'vue';
 

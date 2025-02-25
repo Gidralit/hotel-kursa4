@@ -27,9 +27,8 @@
 <script setup>
 import { ProfileSkeletonCard, ProfileCard, ProfileBooking, ReservationCardSkeleton } from '@/components'
 import { onMounted } from 'vue';
-import { useAuthStore } from "@/stores/AuthStore.js";
 import { storeToRefs } from "pinia";
-import { useRoomsStore } from "@/stores/RoomsStore.js";
+import { useRoomsStore,useAuthStore } from "@/stores";
 
 
 const { user, isLoading } = storeToRefs(useAuthStore())

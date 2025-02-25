@@ -60,7 +60,7 @@
 
 
 <script setup>
-import {useRoomsStore} from "@/stores/RoomsStore.js";
+import {useRoomsStore} from "@/stores";
 
 const props = defineProps({
   reservation: {

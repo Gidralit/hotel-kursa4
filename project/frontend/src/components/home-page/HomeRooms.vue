@@ -29,9 +29,9 @@
 <script setup>
 import { RoomHomeCard, RoomHomeSkeleton } from "@/components";
 
-import {storeToRefs} from "pinia";
-import {useRoomsStore} from "@/stores/RoomsStore.js";
-import {onMounted} from "vue";
+import { storeToRefs } from "pinia";
+import { useRoomsStore } from "@/stores";
+import { onMounted } from "vue";
 const { mainRooms } = storeToRefs(useRoomsStore())
 const { getMainRooms } = useRoomsStore()
 

@@ -108,10 +108,10 @@
 
 <script setup>
 import { useForm } from "vee-validate";
-import { useAuthStore } from "@/stores/AuthStore.js";
+import { useAuthStore } from "@/stores";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
-import { registrationSchema } from "@/shared/validation.js";
+import { registrationSchema } from "@/shared";
 
 const { isAuthenticated } = storeToRefs(useAuthStore());
 const authStore = useAuthStore();

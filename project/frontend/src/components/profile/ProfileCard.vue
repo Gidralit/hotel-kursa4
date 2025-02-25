@@ -26,7 +26,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useAuthStore } from '@/stores/AuthStore';
+import { useAuthStore } from '@/stores';
 
 import { ProfileCardForm, ProfileCardInfo, ProfileCardAvatar} from "@/components";
 import {storeToRefs} from "pinia";

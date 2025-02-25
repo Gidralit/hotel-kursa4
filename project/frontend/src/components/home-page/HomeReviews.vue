@@ -21,7 +21,7 @@
 <script setup>
 
 import { HomeReviewItem } from "@/components";
-import {useReviewsStore} from "@/stores/ReviewsStore.js";
+import {useReviewsStore} from "@/stores";
 import {storeToRefs} from "pinia";
 import {onMounted} from "vue";
 

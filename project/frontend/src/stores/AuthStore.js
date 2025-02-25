@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia';
 import {computed, ref} from "vue";
 import {useRouter} from "vue-router";
-import {api} from "@/shared/index.js";
-import {toastNotification} from "@/shared/functions.js";
+import { api,toastNotification } from "@/shared";
 
 export const useAuthStore = defineStore('auth', () => {
     const token = ref(localStorage.getItem('token') || null);
@@ -11,7 +10,6 @@ export const useAuthStore = defineStore('auth', () => {
     const user = ref(null);
     const isLoading = ref(false);
     const isAdmin = ref(localStorage.getItem('admin') === 'true');
-    const authStore = useAuthStore()
 
     const login = async (credentials) => {
         try {
@@ -29,10 +27,7 @@ export const useAuthStore = defineStore('auth', () => {
             } else {
                 await toastNotification("Вы авторизовались!", "success");
             }
-
-            setTimeout(()=>{
-                router.push('/')
-            },2000)
+            await  router.push('profile')
         } catch (error) {
             if (error.response && error.response.status === 401) {
                 loginError.value = 'Неверные введеные данные';
@@ -53,9 +48,7 @@ export const useAuthStore = defineStore('auth', () => {
             localStorage.setItem('token', token.value);
 
             toastNotification("Вы зарегистрировались", "success");
-            setTimeout(() => {
-                router.push('/');
-            }, 1500);
+            await router.push('/');
         } catch (error) {
             if (error.response && error.response.status === 422) {
                 const errorMessage = error.response.data.message;

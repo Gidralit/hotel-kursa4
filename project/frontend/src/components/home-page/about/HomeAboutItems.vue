@@ -55,10 +55,10 @@
 </template>
 
 <script setup>
-import {useMainStore} from "@/stores/MainStore.js";
-import {storeToRefs} from "pinia";
-import {onMounted} from "vue";
-import HomeAboutSkeleton from "@/components/home-page/about/HomeAboutSkeleton.vue";
+import { useMainStore } from "@/stores";
+import { storeToRefs } from "pinia";
+import { onMounted } from "vue";
+import { HomeAboutSkeleton } from "@/components";
 
 const { getMainInfo } = useMainStore();
 const { data } = storeToRefs(useMainStore())

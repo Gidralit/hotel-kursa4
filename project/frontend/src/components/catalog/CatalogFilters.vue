@@ -38,7 +38,7 @@
 
 <script setup>
 import { FilterPriceInput, FilterAreas, FilterEquipments, FilterButtons, CatalogFiltersSkeleton } from '@/components';
-import { useCatalogStore } from "@/stores/CatalogStore.js";
+import { useCatalogStore } from "@/stores";
 import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
 

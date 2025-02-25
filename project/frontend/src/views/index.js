@@ -1,8 +1,7 @@
-import HomeView  from "@/views/HomeView.vue";
-import NotFoundView from "@/views/NotFoundView.vue";
-import RegisterView from "@/views/RegisterView.vue";
-import CatalogView from "@/views/CatalogView.vue";
-import ProfileView from "@/views/ProfileView.vue";
-import RoomView from "@/views/RoomView.vue";
+export { default as HomeView } from './HomeView.vue'
+export { default as NotFoundView } from './NotFoundView.vue'
+export { default as RegisterView } from './RegisterView.vue'
+export { default as CatalogView } from './CatalogView.vue'
+export { default as ProfileView } from './ProfileView.vue'
+export { default as RoomView } from './RoomView.vue'
 
-export { HomeView, NotFoundView, RegisterView, CatalogView, ProfileView, RoomView }
