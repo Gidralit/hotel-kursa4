@@ -7,8 +7,7 @@
     >
   </router-link>
 </template>
-<script setup lang="ts">
-</script>
+
 <style scoped lang="scss">
 .header__logo{
   width: 100px;

@@ -4,7 +4,7 @@ import { toast } from "vue3-toastify";
 export const toastNotification = (text,type) =>{
     toast(text, {
         autoClose: 2000,
-        theme: "auto",
+        theme: "light",
         type: type,
         position: "top-right",
         dangerouslyHTMLString: true

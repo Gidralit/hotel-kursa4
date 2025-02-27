@@ -1,8 +1,3 @@
-<script setup>
-import TheHeader from '@/components/header/TheHeader.vue'
-import TheFooter from "@/components/footer/TheFooter.vue";
-</script>
-
 <template>
   <main>
     <div class="wrapper">
@@ -28,6 +23,11 @@ import TheFooter from "@/components/footer/TheFooter.vue";
     </div>
   </main>
 </template>
+
+<script setup>
+import TheHeader from '@/components/header/TheHeader.vue'
+import TheFooter from "@/components/footer/TheFooter.vue";
+</script>
 
 
 <style scoped lang="scss">

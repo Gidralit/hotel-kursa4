@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import {ref} from "vue";
-import {api} from "@/shared/index.js";
+import {api} from "@/shared";
 
 export const useMainStore = defineStore("mainStore", () => {
     const slogan = ref(localStorage.getItem('slogan') || null);

@@ -1,12 +1,3 @@
-<script setup>
-import { useAuthStore } from '@/stores/AuthStore.js';
-
-import {storeToRefs} from "pinia";
-
-const { isAuthenticated } = storeToRefs(useAuthStore());
-const authStore = useAuthStore();
-</script>
-
 <template>
   <nav class="header__menu flex gap-8">
     <router-link
@@ -46,6 +37,14 @@ const authStore = useAuthStore();
     </div>
   </nav>
 </template>
+
+<script setup>
+import { useAuthStore } from '@/stores/AuthStore.js';
+import {storeToRefs} from "pinia";
+
+const { isAuthenticated } = storeToRefs(useAuthStore());
+const authStore = useAuthStore();
+</script>
 
 <style scoped lang="scss">
 .header__menu{

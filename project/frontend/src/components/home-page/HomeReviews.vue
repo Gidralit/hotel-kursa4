@@ -1,18 +1,3 @@
-<script setup>
-
-import HomeReviewItem from "@/components/home-page/HomeReviewItem.vue";
-import {useReviewsStore} from "@/stores/ReviewsStore.js";
-import {storeToRefs} from "pinia";
-import {onMounted} from "vue";
-
-const { getRandomReviews } = useReviewsStore()
-const { randomReviews } = storeToRefs(useReviewsStore())
-
-onMounted(async () =>{
-  await getRandomReviews()
-})
-</script>
-
 <template>
   <section
     id="reviews"
@@ -32,6 +17,21 @@ onMounted(async () =>{
     <div v-else>Отзывов пока нету</div>
   </section>
 </template>
+
+<script setup>
+
+import { HomeReviewItem } from "@/components";
+import {useReviewsStore} from "@/stores";
+import {storeToRefs} from "pinia";
+import {onMounted} from "vue";
+
+const { getRandomReviews } = useReviewsStore()
+const { randomReviews } = storeToRefs(useReviewsStore())
+
+onMounted(async () =>{
+  await getRandomReviews()
+})
+</script>
 
 <style scoped lang="scss">
 .reviews {

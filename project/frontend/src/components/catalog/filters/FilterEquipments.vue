@@ -1,5 +1,20 @@
+<template>
+  <div class="filter__group">
+    <h3 class="filter__subtitle">Оснащение</h3>
+    <div class="filter__checkbox-group">
+      <filter-equipment
+        v-for="equipment in equipments"
+        :key="equipment.id"
+        :equipment="equipment"
+        :selected="selectedEquipments.includes(equipment.id)"
+        @change="toggleEquipment(equipment)"
+      />
+    </div>
+  </div>
+</template>
+
 <script setup>
-import FilterEquipment from "@/components/catalog/filters/FilterEquipment.vue";
+import { FilterEquipment } from "@/components";
 import { ref, watch } from 'vue';
 
 const props = defineProps({
@@ -31,21 +46,6 @@ watch(() => props.selected, (newVal) => {
   selectedEquipments.value = [...newVal];
 });
 </script>
-
-<template>
-  <div class="filter__group">
-    <h3 class="filter__subtitle">Оснащение</h3>
-    <div class="filter__checkbox-group">
-      <filter-equipment
-        v-for="equipment in equipments"
-        :key="equipment.id"
-        :equipment="equipment"
-        :selected="selectedEquipments.includes(equipment.id)"
-        @change="toggleEquipment(equipment)"
-      />
-    </div>
-  </div>
-</template>
 
 <style scoped lang="scss">
 .filter {

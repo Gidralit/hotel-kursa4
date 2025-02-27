@@ -1,8 +1,3 @@
-<script setup>
-
-import HomeAboutItems from "@/components/home-page/about/HomeAboutItems.vue";
-</script>
-
 <template>
   <section
     id="about"
@@ -30,6 +25,11 @@ import HomeAboutItems from "@/components/home-page/about/HomeAboutItems.vue";
     ></iframe>
   </section>
 </template>
+
+<script setup>
+
+import HomeAboutItems from "@/components/home-page/about/HomeAboutItems.vue";
+</script>
 
 <style scoped lang="scss">
 .about{

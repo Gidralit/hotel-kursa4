@@ -43,6 +43,9 @@
   </div>
 </template>
 
+<script setup lang="ts">
+import { RandomRoomSkeleton } from "@/components";
+</script>
 <style scoped lang="scss">
 .room{
   &__container {
@@ -122,6 +125,3 @@
   }
 }
 </style>
-<script setup lang="ts">
-import RandomRoomSkeleton from "@/components/room/RandomRoomSkeleton.vue";
-</script>

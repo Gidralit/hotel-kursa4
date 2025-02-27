@@ -1,0 +1,5 @@
+export { useAuthStore } from './AuthStore.js'
+export { useCatalogStore } from './CatalogStore.js'
+export { useMainStore } from './MainStore.js'
+export { useRoomsStore } from './RoomsStore.js'
+export { useReviewsStore } from './ReviewsStore.js'

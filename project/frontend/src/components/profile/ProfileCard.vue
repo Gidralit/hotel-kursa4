@@ -1,10 +1,34 @@
+<template>
+  <div
+    v-if="!isLoading"
+    class="profile container"
+  >
+    <profile-card-avatar
+      :photo="user.photo"
+      :is-admin="isAdmin"
+    />
+
+    <profile-card-info
+      v-if="!editing"
+      :user="user"
+      @start="startEditing"
+    />
+
+    <profile-card-form
+      v-else
+      :errors="errors"
+      :form-data="formData"
+      @save="saveChanges"
+      @cancel="cancelEditing"
+    />
+  </div>
+</template>
+
 <script setup>
 import { ref } from 'vue';
-import { useAuthStore } from '@/stores/AuthStore';
+import { useAuthStore } from '@/stores';
 
-import ProfileCardForm from "@/components/profile/ProfileCardForm.vue";
-import ProfileCardInfo from "@/components/profile/ProfileCardInfo.vue";
-import ProfileCardAvatar from "@/components/profile/ProfileCardAvatar.vue";
+import { ProfileCardForm, ProfileCardInfo, ProfileCardAvatar} from "@/components";
 import {storeToRefs} from "pinia";
 
 const props = defineProps({
@@ -81,32 +105,6 @@ const saveChanges = async () => {
   }
 };
 </script>
-
-<template>
-  <div
-    v-if="!isLoading"
-    class="profile container"
-  >
-    <profile-card-avatar
-      :photo="user.photo"
-      :is-admin="isAdmin"
-    />
-
-    <profile-card-info
-      v-if="!editing"
-      :user="user"
-      @start="startEditing"
-    />
-
-    <profile-card-form
-      v-else
-      :errors="errors"
-      :form-data="formData"
-      @save="saveChanges"
-      @cancel="cancelEditing"
-    />
-  </div>
-</template>
 
 <style scoped lang="scss">
 .profile {

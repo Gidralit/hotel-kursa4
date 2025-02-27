@@ -1,3 +1,15 @@
+<template>
+  <label class="filter__checkbox-label">
+    <input
+      type="checkbox"
+      class="filter__checkbox"
+      :checked="selected"
+      @change="emit('change')"
+    />
+    <span>{{ equipment.name }}</span>
+  </label>
+</template>
+
 <script setup>
 defineProps({
   equipment: {
@@ -12,18 +24,6 @@ defineProps({
 
 const emit = defineEmits(['change']);
 </script>
-
-<template>
-  <label class="filter__checkbox-label">
-    <input
-      type="checkbox"
-      class="filter__checkbox"
-      :checked="selected"
-      @change="emit('change')"
-    />
-    <span>{{ equipment.name }}</span>
-  </label>
-</template>
 
 
 <style scoped lang="scss">

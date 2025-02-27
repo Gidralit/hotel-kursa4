@@ -1,48 +1,3 @@
-<script setup>
-import { useForm } from "vee-validate";
-import { useAuthStore } from "@/stores/AuthStore.js";
-import { storeToRefs } from "pinia";
-import { useRouter } from "vue-router";
-import { registrationSchema } from "@/shared/validation.js";
-
-const { isAuthenticated } = storeToRefs(useAuthStore());
-const authStore = useAuthStore();
-const router = useRouter();
-
-const { defineField, errors, handleSubmit } = useForm({
-  validationSchema: registrationSchema,
-});
-
-const [name, nameAttrs] = defineField("name");
-const [email, emailAttrs] = defineField("email");
-const [phone, phoneAttrs] = defineField("phone");
-const [password, passwordAttrs] = defineField("password");
-const [photo, photoAttrs] = defineField("photo");
-
-const handlePhotoUpload = (e) => {
-  photo.value = e.target.files[0];
-};
-
-const submit = handleSubmit((values) => {
-  const formData = new FormData();
-  formData.append("name", values.name);
-  formData.append("email", values.email);
-  formData.append("phone", values.phone);
-  formData.append("password", values.password);
-
-  if (photo.value) {
-    formData.append("photo", photo.value);
-  }
-
-  authStore.register(formData);
-});
-
-const goHome = () => {
-  if (isAuthenticated.value) router.push("/");
-};
-</script>
-
-
 <template>
   <form @submit.prevent="submit">
     <label
@@ -149,6 +104,51 @@ const goHome = () => {
     </button>
   </form>
 </template>
+
+
+<script setup>
+import { useForm } from "vee-validate";
+import { useAuthStore } from "@/stores";
+import { storeToRefs } from "pinia";
+import { useRouter } from "vue-router";
+import { registrationSchema } from "@/shared";
+
+const { isAuthenticated } = storeToRefs(useAuthStore());
+const authStore = useAuthStore();
+const router = useRouter();
+
+const { defineField, errors, handleSubmit } = useForm({
+  validationSchema: registrationSchema,
+});
+
+const [name, nameAttrs] = defineField("name");
+const [email, emailAttrs] = defineField("email");
+const [phone, phoneAttrs] = defineField("phone");
+const [password, passwordAttrs] = defineField("password");
+const [photo, photoAttrs] = defineField("photo");
+
+const handlePhotoUpload = (e) => {
+  photo.value = e.target.files[0];
+};
+
+const submit = handleSubmit((values) => {
+  const formData = new FormData();
+  formData.append("name", values.name);
+  formData.append("email", values.email);
+  formData.append("phone", values.phone);
+  formData.append("password", values.password);
+
+  if (photo.value) {
+    formData.append("photo", photo.value);
+  }
+
+  authStore.register(formData);
+});
+
+const goHome = () => {
+  if (isAuthenticated.value) router.push("/");
+};
+</script>
 
 
 <style scoped lang="scss">

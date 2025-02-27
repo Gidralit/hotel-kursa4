@@ -1,17 +1,3 @@
-<script setup>
-defineProps({
-  isLoading:{
-    type: Boolean,
-    required: true,
-  },
-  reservations:{
-    type: Array,
-    required: true,
-  }
-})
-import ReservationCard from "@/components/reservations/ReservationCard.vue";
-</script>
-
 <template>
   <section
     v-if="!isLoading"
@@ -39,6 +25,20 @@ import ReservationCard from "@/components/reservations/ReservationCard.vue";
     </div>
   </section>
 </template>
+
+<script setup>
+defineProps({
+  isLoading:{
+    type: Boolean,
+    required: true,
+  },
+  reservations:{
+    type: Array,
+    required: true,
+  }
+})
+import { ReservationCard } from "@/components";
+</script>
 
 <style scoped lang="scss">
 .booking {

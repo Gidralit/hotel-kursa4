@@ -1,10 +1,29 @@
+<template>
+  <div>
+    <room-card
+      v-if="room"
+      :key="route.params.id"
+      :room="room"
+      :random-rooms="randomRooms"
+      @start-book="startBook(room.id)"
+    />
+    <room-card-skeleton v-else />
+
+    <booking-modal
+      v-if="book"
+      :room-id="selectedRoomId"
+      @cancel="cancelBook"
+      @success="cancelBook"
+    />
+  </div>
+</template>
+
 <script setup>
 import {ref, onMounted, watch} from 'vue';
 import { useRoute } from 'vue-router';
-import { RoomCard, RoomCardSkeleton } from '@/components/room/room-card/index.js'
-import BookingModal from "@/components/BookingModal.vue";
+import { RoomCard, RoomCardSkeleton, BookingModal } from '@/components'
 
-import {useRoomsStore} from "@/stores/RoomsStore.js";
+import {useRoomsStore} from "@/stores";
 import {storeToRefs} from "pinia";
 
 const { getRooms, getRandomRooms } = useRoomsStore();
@@ -47,24 +66,4 @@ watch(() => route.params.id, async () => {
   await getRandomRooms();
 });
 </script>
-
-<template>
-  <div>
-    <room-card
-      v-if="room"
-      :key="route.params.id"
-      :room="room"
-      :random-rooms="randomRooms"
-      @start-book="startBook(room.id)"
-    />
-    <room-card-skeleton v-else />
-
-    <booking-modal
-      v-if="book"
-      :room-id="selectedRoomId"
-      @cancel="cancelBook"
-      @success="cancelBook"
-    />
-  </div>
-</template>
 

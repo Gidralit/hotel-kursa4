@@ -1,3 +1,11 @@
+<template>
+  <div class="review">
+    <p>{{ review.content }}</p>
+    <!--на бэке нету получения данных о пользвателе-->
+    <span>- Анна, оценка: {{ review.rating }}</span>
+  </div>
+</template>
+
 <script setup>
 defineProps({
   review:{
@@ -6,14 +14,6 @@ defineProps({
   }
 })
 </script>
-
-<template>
-  <div class="review">
-    <p>{{ review.content }}</p>
-    <!--на бэке нету получения данных о пользвателе-->
-    <span>- Анна, оценка: {{ review.rating }}</span>
-  </div>
-</template>
 
 <style scoped lang="scss">
 .review {

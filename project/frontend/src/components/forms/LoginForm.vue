@@ -1,17 +1,3 @@
-<script setup>
-import { ref } from 'vue';
-import { useAuthStore } from '@/stores/AuthStore.js';
-
-const email = ref('');
-const password = ref('');
-const authStore = useAuthStore();
-
-const handleLogin = () => {
-  authStore.login({ email: email.value, password: password.value });
-};
-
-</script>
-
 <template>
   <div class="login">
     <form @submit.prevent="handleLogin">
@@ -52,6 +38,20 @@ const handleLogin = () => {
     </form>
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue';
+import { useAuthStore } from '@/stores/AuthStore.js';
+
+const email = ref('');
+const password = ref('');
+const authStore = useAuthStore();
+
+const handleLogin = () => {
+  authStore.login({ email: email.value, password: password.value });
+};
+
+</script>
 
 <style scoped lang="scss">
 input:-webkit-autofill,

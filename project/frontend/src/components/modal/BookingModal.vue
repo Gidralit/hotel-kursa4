@@ -1,92 +1,3 @@
-<script setup>
-import { onMounted, onUnmounted, ref, watch } from "vue";
-import { useRoomsStore } from "@/stores/RoomsStore.js";
-
-const props = defineProps({
-  roomId: {
-    type: Number,
-    required: true,
-  },
-});
-
-const roomsStore = useRoomsStore();
-
-const numberOfPets = ref(1);
-const petNames = ref([""]);
-const checkIn = ref("");
-const checkOut = ref("");
-const errors = ref({});
-
-const emit = defineEmits(["success", "cancel"]);
-
-const validate = () => {
-  errors.value = {};
-
-  // Проверка всех имен питомцев
-  petNames.value.forEach((name, index) => {
-    if (!/^[A-Za-zА-Яа-яёЁ\s\-]+$/.test(name)) {
-      errors.value[`petName${index}`] = "Имя питомца может содержать только буквы, пробелы и тире.";
-    }
-  });
-
-  if (!checkIn.value || new Date(checkIn.value - 1) < new Date()) {
-    errors.value.checkIn = "Дата заезда не может быть раньше сегодняшнего дня.";
-  }
-
-  if (!checkOut.value || new Date(checkOut.value) <= new Date(checkIn.value)) {
-    errors.value.checkOut = "Дата выезда должна быть позже даты заезда.";
-  }
-
-  if (numberOfPets.value < 1 || numberOfPets.value > 4) {
-    errors.value.numberOfPets = "Можно забронировать для 1-4 питомцев.";
-  }
-
-  return Object.keys(errors.value).length === 0;
-};
-
-const submitBooking = async () => {
-  if (!validate()) return;
-
-  const formData = {
-    room_id: props.roomId,
-    pet_name: petNames.value,
-    start_date: checkIn.value,
-    end_date: checkOut.value,
-
-  };
-
-  await roomsStore.bookingRoom(formData);
-  emit("success");
-};
-
-const handleEscape = (event) => {
-  if (event.key === "Escape") {
-    emit("cancel");
-  }
-};
-
-// Обновление количества полей для ввода имен питомцев
-
-watch(numberOfPets, (newCount) => {
-  if (newCount > petNames.value.length && newCount < 5) {
-    while (petNames.value.length < newCount) {
-      petNames.value.push("");
-    }
-  } else {
-    petNames.value = petNames.value.slice(0, newCount);
-  }
-});
-
-onMounted(async () => {
-  window.addEventListener("keydown", handleEscape);
-
-});
-
-onUnmounted(() => {
-  window.removeEventListener("keydown", handleEscape);
-});
-</script>
-
 <template>
   <div class="booking-modal__overlay">
     <div class="booking-modal__content">
@@ -203,6 +114,95 @@ onUnmounted(() => {
     </div>
   </div>
 </template>
+
+<script setup>
+import { onMounted, onUnmounted, ref, watch } from "vue";
+import { useRoomsStore } from "@/stores/RoomsStore.js";
+
+const props = defineProps({
+  roomId: {
+    type: Number,
+    required: true,
+  },
+});
+
+const roomsStore = useRoomsStore();
+
+const numberOfPets = ref(1);
+const petNames = ref([""]);
+const checkIn = ref("");
+const checkOut = ref("");
+const errors = ref({});
+
+const emit = defineEmits(["success", "cancel"]);
+
+const validate = () => {
+  errors.value = {};
+
+  // Проверка всех имен питомцев
+  petNames.value.forEach((name, index) => {
+    if (!/^[A-Za-zА-Яа-яёЁ\s\-]+$/.test(name)) {
+      errors.value[`petName${index}`] = "Имя питомца может содержать только буквы, пробелы и тире.";
+    }
+  });
+
+  if (!checkIn.value || new Date(checkIn.value - 1) < new Date()) {
+    errors.value.checkIn = "Дата заезда не может быть раньше сегодняшнего дня.";
+  }
+
+  if (!checkOut.value || new Date(checkOut.value) <= new Date(checkIn.value)) {
+    errors.value.checkOut = "Дата выезда должна быть позже даты заезда.";
+  }
+
+  if (numberOfPets.value < 1 || numberOfPets.value > 4) {
+    errors.value.numberOfPets = "Можно забронировать для 1-4 питомцев.";
+  }
+
+  return Object.keys(errors.value).length === 0;
+};
+
+const submitBooking = async () => {
+  if (!validate()) return;
+
+  const formData = {
+    room_id: props.roomId,
+    pet_name: petNames.value,
+    start_date: checkIn.value,
+    end_date: checkOut.value,
+
+  };
+
+  await roomsStore.bookingRoom(formData);
+  emit("success");
+};
+
+const handleEscape = (event) => {
+  if (event.key === "Escape") {
+    emit("cancel");
+  }
+};
+
+// Обновление количества полей для ввода имен питомцев
+
+watch(numberOfPets, (newCount) => {
+  if (newCount > petNames.value.length && newCount < 5) {
+    while (petNames.value.length < newCount) {
+      petNames.value.push("");
+    }
+  } else {
+    petNames.value = petNames.value.slice(0, newCount);
+  }
+});
+
+onMounted(async () => {
+  window.addEventListener("keydown", handleEscape);
+
+});
+
+onUnmounted(() => {
+  window.removeEventListener("keydown", handleEscape);
+});
+</script>
 
 <style scoped lang="scss">
 .booking-modal {

@@ -1,10 +1,3 @@
-<script setup>
-import {storeToRefs} from "pinia";
-import {useAuthStore} from "@/stores/AuthStore.js";
-
-const { isAuthenticated } = storeToRefs(useAuthStore());
-</script>
-
 <template>
   <button
     v-if="isAuthenticated"
@@ -20,6 +13,13 @@ const { isAuthenticated } = storeToRefs(useAuthStore());
     Забронировать
   </router-link>
 </template>
+
+<script setup>
+import {storeToRefs} from "pinia";
+import {useAuthStore} from "@/stores";
+
+const { isAuthenticated } = storeToRefs(useAuthStore());
+</script>
 
 <style scoped lang="scss">
 .link{

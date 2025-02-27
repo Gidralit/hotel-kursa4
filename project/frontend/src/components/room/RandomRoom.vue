@@ -1,12 +1,3 @@
-<script setup>
-defineProps({
-  randomRoom:{
-    type: Object,
-    required: true
-  }
-})
-</script>
-
 <template>
   <router-link :to="`/room/${randomRoom.id}`">
     <div
@@ -31,6 +22,15 @@ defineProps({
     </div>
   </router-link>
 </template>
+
+<script setup>
+defineProps({
+  randomRoom:{
+    type: Object,
+    required: true
+  }
+})
+</script>
 
 <style scoped lang="scss">
 .room{

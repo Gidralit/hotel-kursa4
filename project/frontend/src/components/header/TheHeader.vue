@@ -1,23 +1,5 @@
-<script setup>
-import TheHeaderLogo from '@/components/header/TheHeaderLogo.vue'
-import TheHeaderNav from '@/components/header/TheHeaderNav.vue'
-
-import {onMounted} from "vue";
-import {storeToRefs} from "pinia";
-import {useMainStore} from "@/stores/MainStore.js";
-
-const { getMainInfo } = useMainStore();
-const { city, slogan } = storeToRefs(useMainStore())
-
-onMounted(async () => {
-  await getMainInfo();
-})
-
-</script>
-
 <template>
   <header
-    v-if="city"
     class="header"
   >
     <div class="flex justify-between">
@@ -27,13 +9,18 @@ onMounted(async () => {
         <span
           class="header__city"
         >
-          <b>Город</b> - {{ city }}
+          <b>Город</b> - Томск
         </span>
       </div>
     </div>
-    <span class="header__slogan">{{ slogan }}</span>
+    <span class="header__slogan">Уют для вашего кота - забота в каждом мурлыканье</span>
   </header>
 </template>
+
+<script setup>
+import { TheHeaderLogo,TheHeaderNav } from '@/components'
+
+</script>
 
 <style scoped lang="scss">
 .header{

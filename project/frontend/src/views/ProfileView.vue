@@ -1,23 +1,3 @@
-<script setup>
-import { ProfileSkeletonCard, ProfileCard, ProfileBooking } from '@/components/profile/index.js'
-import { onMounted } from 'vue';
-import { useAuthStore } from "@/stores/AuthStore.js";
-import {storeToRefs} from "pinia";
-import {useRoomsStore} from "@/stores/RoomsStore.js";
-import ReservationCardSkeleton from "@/components/reservations/ReservationCardSkeleton.vue";
-
-
-const { user, isLoading } = storeToRefs(useAuthStore())
-const { userData } = useAuthStore();
-
-const { reservations } = storeToRefs(useRoomsStore());
-const { getReservations } = useRoomsStore();
-
-onMounted(async ()=>{
-  await userData();
-  await getReservations();
-})
-</script>
 <template>
   <div>
     <template v-if="user && reservations">
@@ -44,6 +24,24 @@ onMounted(async ()=>{
     </template>
   </div>
 </template>
+<script setup>
+import { ProfileSkeletonCard, ProfileCard, ProfileBooking, ReservationCardSkeleton } from '@/components'
+import { onMounted } from 'vue';
+import { storeToRefs } from "pinia";
+import { useRoomsStore,useAuthStore } from "@/stores";
+
+
+const { user, isLoading } = storeToRefs(useAuthStore())
+const { userData } = useAuthStore();
+
+const { reservations } = storeToRefs(useRoomsStore());
+const { getReservations } = useRoomsStore();
+
+onMounted(async ()=>{
+  await userData();
+  await getReservations();
+})
+</script>
 <style scoped lang="scss">
 .booking__list {
   display: grid;

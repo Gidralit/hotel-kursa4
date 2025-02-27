@@ -1,14 +1,3 @@
-<script setup>
-defineProps({
-  room: {
-    type: Object,
-    required: true
-  }
-});
-
-const emit = defineEmits(['open']);
-</script>
-
 <template>
   <div class="room__gallery">
     <div
@@ -45,6 +34,17 @@ const emit = defineEmits(['open']);
     </div>
   </div>
 </template>
+
+<script setup>
+defineProps({
+  room: {
+    type: Object,
+    required: true
+  }
+});
+
+const emit = defineEmits(['open']);
+</script>
 
 <style scoped lang="scss">
 .room__gallery {

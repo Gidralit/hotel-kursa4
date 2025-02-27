@@ -1,41 +1,3 @@
-<script setup>
-import { FilterPriceInput, FilterAreas, FilterEquipments, FilterButtons, CatalogFiltersSkeleton } from '@/components/catalog/index.js';
-import { useCatalogStore } from "@/stores/CatalogStore.js";
-import { onMounted, ref } from "vue";
-import { storeToRefs } from "pinia";
-
-const catalogStore = useCatalogStore();
-const { filters, params } = storeToRefs(catalogStore);
-
-// Локальные значения для фильтров
-const selectedAreas = ref([]);
-const selectedEquipments = ref([]);
-const minPrice = ref(null);
-const maxPrice = ref(null);
-
-onMounted(async () => {
-  await catalogStore.getFilters();
-  minPrice.value = filters.value.min_price;
-  maxPrice.value = filters.value.max_price;
-});
-
-const applyFilters = async () => {
-  params.value.area = selectedAreas.value;
-  params.value.equipment = selectedEquipments.value;
-  params.value.min_price = minPrice.value;
-  params.value.max_price = maxPrice.value;
-  await catalogStore.applyFilters();
-};
-
-const resetFilters = async () => {
-  selectedAreas.value = [];
-  selectedEquipments.value = [];
-  minPrice.value = filters.value.min_price;
-  maxPrice.value = filters.value.max_price;
-  await catalogStore.resetFilters();
-};
-</script>
-
 <template>
   <div
     v-if="filters"
@@ -73,6 +35,44 @@ const resetFilters = async () => {
   </div>
   <catalog-filters-skeleton v-else />
 </template>
+
+<script setup>
+import { FilterPriceInput, FilterAreas, FilterEquipments, FilterButtons, CatalogFiltersSkeleton } from '@/components';
+import { useCatalogStore } from "@/stores";
+import { onMounted, ref } from "vue";
+import { storeToRefs } from "pinia";
+
+const catalogStore = useCatalogStore();
+const { filters, params } = storeToRefs(catalogStore);
+
+// Локальные значения для фильтров
+const selectedAreas = ref([]);
+const selectedEquipments = ref([]);
+const minPrice = ref(null);
+const maxPrice = ref(null);
+
+onMounted(async () => {
+  await catalogStore.getFilters();
+  minPrice.value = filters.value.min_price;
+  maxPrice.value = filters.value.max_price;
+});
+
+const applyFilters = async () => {
+  params.value.area = selectedAreas.value;
+  params.value.equipment = selectedEquipments.value;
+  params.value.min_price = minPrice.value;
+  params.value.max_price = maxPrice.value;
+  await catalogStore.applyFilters();
+};
+
+const resetFilters = async () => {
+  selectedAreas.value = [];
+  selectedEquipments.value = [];
+  minPrice.value = filters.value.min_price;
+  maxPrice.value = filters.value.max_price;
+  await catalogStore.resetFilters();
+};
+</script>
 
 <style scoped lang="scss">
 .filter {

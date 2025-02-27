@@ -1,14 +1,3 @@
-<script setup>
-import ReservedButton from "@/components/button/ReservedButton.vue";
-defineProps({
-  room: {
-    type: Object,
-    required: true
-  }
-})
-const emit = defineEmits(['start'])
-</script>
-
 <template>
   <div class="room__details">
     <h2 class="room__details-title">{{ room.name }}</h2>
@@ -53,6 +42,17 @@ const emit = defineEmits(['start'])
     />
   </div>
 </template>
+
+<script setup>
+import { ReservedButton } from "@/components";
+defineProps({
+  room: {
+    type: Object,
+    required: true
+  }
+})
+const emit = defineEmits(['start'])
+</script>
 
 <style scoped lang="scss">
 .room__details {

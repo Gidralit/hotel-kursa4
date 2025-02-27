@@ -1,7 +1,3 @@
-<script setup>
-const emit = defineEmits(['apply', 'reset']);
-</script>
-
 <template>
   <div class="filter__buttons">
     <button
@@ -18,6 +14,10 @@ const emit = defineEmits(['apply', 'reset']);
     </button>
   </div>
 </template>
+
+<script setup>
+const emit = defineEmits(['apply', 'reset']);
+</script>
 
 <style scoped lang="scss">
 .filter {
