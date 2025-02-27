@@ -8,7 +8,7 @@ services:
       - hotel
     volumes:
       - ../project/server/nginx.conf:/etc/nginx/conf.d/default.conf
-      - ../backend/storage/app/public:/var/www/storage/app/public
+      - ../project/backend/storage/app/public:/var/www/storage/app/public
     depends_on:
       - frontend
       - backend
@@ -44,12 +44,12 @@ services:
       - ../project/backend:/var/www
     environment:
       APP_DEBUG: "true"
-      DB_CONNECTION: "pgsql"
-      DB_HOST: "db"
-      DB_PORT: "5432"
-      DB_DATABASE: "database"
-      DB_USERNAME: "admin"
-      DB_PASSWORD: "admin"
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: database
+      DB_USERNAME: admin
+      DB_PASSWORD: admin
     depends_on:
       - db
     command: >
