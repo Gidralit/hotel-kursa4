@@ -28,7 +28,7 @@ class AuthController extends Controller
     }
 
     public function verifyEmail(VerifyEmailRequest $request){
-        EmailService::verifyEmail($request->validated()->token);
+        EmailService::verifyEmail($request->validated()['token']);
         $baseURL = env('APP_URL');
         return redirect()->to("$baseURL/profile");
     }

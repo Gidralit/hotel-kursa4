@@ -11,5 +11,5 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/email/send-verification', [AuthController::class, 'sendVerificationEmail'])->name('verification.send');
 });
-Route::post('/user/email/verify', [AuthController::class, 'verifyEmail'])->name('verification.verify');
+Route::get('/user/email/verify', [AuthController::class, 'verifyEmail'])->name('verification.verify');
 
