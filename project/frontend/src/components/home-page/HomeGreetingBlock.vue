@@ -3,7 +3,7 @@
     <div class="greeting__info">
       <h2 class="greeting__title text-4xl">Теперь в отпуске можно не переживать за Барсика</h2>
       <p class="greeting__text text-xl">Мы позаботимся о ваших любимках, пока вас нет рядом!</p>
-      <router-link to="/catalog"><reserved-button class="px-10"/></router-link>
+      <router-link class="w-fit" to="/catalog"><reserved-button class="px-10"/></router-link>
     </div>
   </section>
 </template>
