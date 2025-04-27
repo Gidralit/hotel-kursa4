@@ -6,16 +6,15 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 
-class RegisterRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
 
     public function rules(): array{
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string'],
-            'phone' => ['required', 'string', 'max:16', 'unique:users'],
-            'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
+            'name' => ['nullable', 'string', 'max:255'],
+            'email' => ['nullable', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['nullable', 'string'],
+            'phone' => ['nullable', 'string', 'min:11', 'max:16','regex:/^[\d\s\(\)\-+]+$/', 'unique:users'],
         ];
     }
 
@@ -28,9 +27,8 @@ class RegisterRequest extends FormRequest
             'phone.required' => 'Номер телефона обязателен для заполнения',
             'phone.max' => 'Номер телефона не должен превышать 11 символов по длине',
             'phone.unique' => 'Данный номер телефона уже занят',
-            'photo.image' => 'Пожалуйста загрузите изображение',
-            'photo.mimes' => 'Пожалуйста загрузите изображение нужного формата',
-            'photo.max' => 'Ваше изображение слишком большого размера',
+            'phone.regex' => 'Формат номера телефона неверный',
+            'phone.min' => 'Длина номера телефона должна быть не меньше 11 символов'
         ];
     }
 
