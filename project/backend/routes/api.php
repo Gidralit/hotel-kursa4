@@ -29,6 +29,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     #Route::apiResource('/bookings', BookingController::class);
     Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
+    Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
+    Route::delete('/bookings/{booking}', [BookingController::class, 'destroy'])->name('bookings.destroy');
 });
 Route::get('/user/email/verify', [AuthController::class, 'verifyEmail'])->name('verification.verify');
 
