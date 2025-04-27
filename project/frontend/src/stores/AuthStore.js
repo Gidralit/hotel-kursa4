@@ -15,7 +15,7 @@ export const useAuthStore = defineStore('auth', () => {
         try {
             const response = await api.post(`login`, credentials);
 
-            token.value = response.data.user_token;
+            token.value = response.data.token;
             localStorage.setItem('token', token.value);
 
             loginError.value = null;
@@ -25,10 +25,13 @@ export const useAuthStore = defineStore('auth', () => {
                 localStorage.setItem('admin', 'true');
                 isAdmin.value = true;
             } else {
-                await toastNotification("Вы авторизовались!", "success");
+                await toastNotification(response.data.message, "success");
             }
-            await  router.push('profile')
+            setTimeout(()=>{
+                router.push('/profile')
+            },1000)
         } catch (error) {
+            console.log(error)
             if (error.response && error.response.status === 401) {
                 loginError.value = 'Неверные введеные данные';
                 toastNotification("Неверные введенные данные", "error");
@@ -41,26 +44,28 @@ export const useAuthStore = defineStore('auth', () => {
     const register = async (formData) => {
         try {
             const response = await api.post("register", formData, {
-                headers: { "Content-Type": "multipart/form-data" },
+                headers: {"Content-Type": "multipart/form-data"},
             });
 
-            token.value = response.data.user_token;
+            token.value = response.data.token;
             localStorage.setItem('token', token.value);
 
-            toastNotification("Вы зарегистрировались", "success");
-            await router.push('/');
+            toastNotification(response.data.message, "success");
+            setTimeout(()=>{
+                router.push('/profile')
+            },1000)
         } catch (error) {
-            if (error.response && error.response.status === 422) {
-                const errorMessage = error.response.data.message;
-                if (errorMessage.includes("The email has already been taken")) {
-                    toastNotification("Этот email уже занят", "error");
-                } else {
-                    toastNotification("Ошибка при регистрации: " + errorMessage, "error");
-                }
-            } else {
-                toastNotification("Ошибка при регистрации", "error");
+            console.log(error)
+            if (error.response.data) {
+                Object.values(error.response.data).forEach(messages => {
+                    messages.forEach(message => {
+                        toastNotification(message, "error");
+                    });
+                });
             }
-            console.error('Ошибка при регистрации:', error.response?.data || error);
+            else {
+                toastNotification('Ошибка регистрации', "error");
+            }
         }
     };
 
@@ -75,11 +80,6 @@ export const useAuthStore = defineStore('auth', () => {
                 router.push('/')
             },2000)
 
-              await api.get('logout', {
-                headers: {
-                    Authorization: `Bearer ${token.value}`
-                }
-            })
             token.value = null;
             isAdmin.value = false
 
