@@ -35,10 +35,6 @@ class RoomsService
             });
         }
 
-        if ($request->has('on_main')) {
-            $query->where('on_main', $request->input('on_main'));
-        }
-
         $sortBy = $request->input('sort_by', 'price');
         $sortOrder = $request->input('sort_order', 'asc');
         $query->orderBy($sortBy, $sortOrder);
